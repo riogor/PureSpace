@@ -1,3 +1,11 @@
+/**
+ * @file frame_clock.hpp
+ * @brief Contains frame syncronization mechanism
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #ifndef CORE_FRAME_CLOCK_HPP
 #define CORE_FRAME_CLOCK_HPP
 
@@ -13,8 +21,7 @@ class FrameClock {
 
   public:
 	explicit FrameClock(const int fps)
-	    : interval{Clock::duration{Clock::duration::period::den / fps}},
-	      start{Clock::now()} {}
+	    : interval{Clock::duration{Clock::duration::period::den / fps}}, start{Clock::now()} {}
 
 	~FrameClock() { std::this_thread::sleep_until(start + interval); }
 };

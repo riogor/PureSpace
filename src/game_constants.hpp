@@ -1,8 +1,24 @@
+/**
+ * @file game_constants.hpp
+ * @brief Contains some global constants & useful structures
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #ifndef CORE_GAME_CONSTANTS_HPP
 #define CORE_GAME_CONSTANTS_HPP
 
 #include <vector>
 
+/**
+ * @brief
+ *
+ * @note Maybe consider changing to @code {.cpp}
+ * typedef pair<float, float> vertex;
+ * @endcode
+ * ?
+ */
 struct vertex {
 	float x, y;
 
@@ -54,11 +70,11 @@ const Hitbox ASTEROID_HITBOX = []() {
 }();
 
 const unsigned int MAX_CHMONYA_INSTANCES_CNT = 1024;
-const unsigned int MAX_ASTEROIDS_INSTANCES_CNT = 1024;
+const unsigned int MAX_ASTEROIDS_INSTANCES_CNT = 20240;
 
-const unsigned int ASTEROIDS_CNT = 16;
-const unsigned int  ASTEROIDS_SPEED = 1;
-const unsigned int  ASTEROIDS_ANGLE_SPEED = 15;
+const unsigned int ASTEROIDS_CNT = 20000;
+const unsigned int ASTEROIDS_SPEED = 1;
+const unsigned int ASTEROIDS_ANGLE_SPEED = 15;
 
 const float PLAYER_SPEED = 0.01;
 const float PLAYER_ANGLE_SPEED = 0.1;

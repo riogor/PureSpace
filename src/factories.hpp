@@ -1,3 +1,11 @@
+/**
+ * @file factories.hpp
+ * @brief Contains some factory methods for entities
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #ifndef CORE_FACTORIES_HPP
 #define CORE_FACTORIES_HPP
 
@@ -11,8 +19,15 @@ struct Asteroid {};
 
 struct Player {};
 
-Hitbox transform(const Hitbox& hitbox, const PositionAngle& transf);
+Hitbox transform(const Hitbox &hitbox, const PositionAngle &transf);
 
+/**
+ * @brief Factory method that makes Chmonya entity
+ *
+ * @param reg
+ * @return entt::entity
+ *
+ */
 inline entt::entity makeChmonya(entt::registry &reg) {
 	const entt::entity e = reg.create();
 	reg.emplace<Types>(e, CHMONYA);
@@ -27,7 +42,23 @@ inline entt::entity makeBackground(entt::registry &reg) {
 	return e;
 }
 
-inline entt::entity makeAsteroid(entt::registry &reg, const PositionAngle& base, const Velocity& vel) {
+/**
+ * @defgroup Interactables
+ *
+ * Interactable entities
+ *
+ * @{
+ */
+
+/**
+ * @brief Factory method that makes Asteroid entity
+ *
+ * @param reg
+ * @param base
+ * @param vel
+ * @return entt::entity
+ */
+inline entt::entity makeAsteroid(entt::registry &reg, const PositionAngle &base, const Velocity &vel) {
 	const entt::entity e = reg.create();
 	reg.emplace<Asteroid>(e);
 	reg.emplace<Types>(e, ASTEROID);
@@ -37,7 +68,16 @@ inline entt::entity makeAsteroid(entt::registry &reg, const PositionAngle& base,
 	return e;
 }
 
-inline entt::entity makePlayer(entt::registry &reg, const PositionAngle& base, const Velocity& vel) {
+/**
+ * @brief Factory method that makes Player entity
+ *
+ * @param reg
+ * @param base
+ * @param vel
+ * @return entt::entity
+ *
+ */
+inline entt::entity makePlayer(entt::registry &reg, const PositionAngle &base, const Velocity &vel) {
 	const entt::entity e = reg.create();
 	reg.emplace<Player>(e);
 	reg.emplace<Types>(e, PLAYER);
@@ -47,16 +87,18 @@ inline entt::entity makePlayer(entt::registry &reg, const PositionAngle& base, c
 	return e;
 }
 
-Hitbox transform(const Hitbox& hitbox, const PositionAngle& transf)
-{
+/**
+ * @}
+ */
+
+Hitbox transform(const Hitbox &hitbox, const PositionAngle &transf) {
 	const auto [x, y, angle] = transf;
 
 	Hitbox transf_hitbox = hitbox;
-	for(vertex& v : transf_hitbox)
-	{
+	for (vertex &v : transf_hitbox) {
 		vertex old_v = v;
-		v.x = old_v.x*std::cos(angle) - old_v.y*std::sin(angle);
-		v.y = old_v.x*std::sin(angle) + old_v.y*std::cos(angle);
+		v.x = old_v.x * std::cos(angle) - old_v.y * std::sin(angle);
+		v.y = old_v.x * std::sin(angle) + old_v.y * std::cos(angle);
 
 		v = v + vertex{x, y};
 	}

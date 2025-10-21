@@ -1,3 +1,11 @@
+/**
+ * @file intersection.hpp
+ * @brief File contains intersection check function & geometry functions
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #ifndef CORE_INTERSECTION_HPP
 #define CORE_INTERSECTION_HPP
 
@@ -8,6 +16,17 @@
 
 inline float dot_product(const vertex &a, const vertex &b) { return a.x * b.x + a.y * b.y; }
 
+/**
+ * @brief Checks if one convex polygon intersects another
+ *
+ * This method uses SAT algorithm (https://dyn4j.org/2010/01/sat/)
+ *
+ * @param base first polygon
+ * @param oth second polygon
+ * @return true, if two intersect each other
+ * @return false otherwise
+ *
+ */
 bool SAT(const Hitbox &base, const Hitbox &oth) {
 
 	for (int i = 0; i < base.size(); i++) {

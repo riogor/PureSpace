@@ -1,3 +1,11 @@
+/**
+ * @file game.hpp
+ * @brief File, containing main game loop & callback function
+ *
+ * @copyright Copyright (c) 2023
+ *
+ */
+
 #ifndef CORE_GAME_HPP
 #define CORE_GAME_HPP
 
@@ -45,6 +53,11 @@ void key_callback(GLFWwindow *window, int key, int scanmode, int action, int mod
 	controls_system(registry, vel, ang_vel);
 }
 
+/**
+ * @brief Main game class
+ *
+ * @todo Better to rewrite this... something
+ */
 class Game {
   private:
 	GLFWwindow *window;
@@ -57,6 +70,10 @@ class Game {
 	Game(GLFWwindow *window, ShaderProgram &program) : window(window), shader_program(program){};
 	~Game(){};
 
+	/**
+	 * @brief Main run method
+	 *
+	 */
 	void run() {
 
 		gen_random.seed(time(0));
@@ -82,7 +99,7 @@ class Game {
 		graphics_map[PLAYER] = &player_data;
 
 		entt::entity background = makeBackground(registry);
-		entt::entity player = makePlayer(registry, {0., 0., 3.14/2}, {0, 0});
+		entt::entity player = makePlayer(registry, {0., 0., 3.14 / 2}, {0, 0});
 
 		// entt::entity asteroid2 = makeAsteroid(registry);
 		// entt::entity asteroid3 = makeAsteroid(registry);
@@ -103,7 +120,7 @@ class Game {
 
 			factory_system(registry, gen_random);
 			destructor_system(registry);
-			collision_system(registry, is_player_alive);
+			// collision_system(registry, is_player_alive);
 			movement_system(registry);
 			graphics_system(registry, graphics_map);
 
